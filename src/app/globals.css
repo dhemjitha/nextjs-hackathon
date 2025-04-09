@@ -39,4 +39,12 @@ body {
   color: var(--BLACK);
   background:var(--WHITE);
 }
-
+.btn{
+  @apply px-3.5 py-2.5 rounded-full
+}
+.btn-primary{
+  @apply text-black bg-colors-green-light
+}
+.btn-text{
+  @apply text-black bg-none
+}

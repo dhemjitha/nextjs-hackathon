@@ -8,14 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily:{
+      fontFamily: {
         poppins: ['Poppins', 'sans-serif'],
         passionOne: ['Passion One', 'sans-serif'],
       },
-      colors:{
+      colors: {
         colors: {
-          greenDark: 'var(--GREEN_DARK)',
-          greenLight: 'var(--GREEN_LIGHT)',
+          "green-dark": 'var(--GREEN_DARK)',
+          "green-light": 'var(--GREEN_LIGHT)',
           white: 'var(--WHITE)',
           black: 'var(--BLACK)',
           grey: 'var(--GREY)'
