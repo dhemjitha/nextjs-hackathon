@@ -2,32 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --GREEN_DARK: rgb(3, 28, 22);
+  --GREEN_LIGHT: rgb(24, 226, 176);
+  --WHITE: rgb(255, 255, 255);
+  --BLACK: rgb(0, 0, 0);
+  --GREY: rgba(163, 163, 163, 1);
+  --GREEN_DARK_10: rgba(3, 28, 22, 0.1);
+  --GREEN_DARK_25: rgba(3, 28, 22, 0.25);
+  --GREEN_DARK_70: rgba(3, 28, 22, 0.7);
+  --WHITE_5: rgba(255, 255, 255, 0.05);
+  --GREY_25: rgba(163, 163, 163, 0.25);
+  --GREY_70: rgb(163, 163, 163);
+  --GREEN_LIGHT_10: rgba(24, 226, 176, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --GREEN_DARK: rgb(24, 226, 176); 
+    --GREEN_LIGHT: rgb(3, 28, 22);
+    --WHITE: rgb(0, 0, 0);
+    --BLACK: rgb(255, 255, 255);
+    --GREEN_DARK_10: rgba(24, 226, 176, 0.1);
+    --GREEN_DARK_25: rgba(24, 226, 176, 0.25);
+    --GREEN_DARK_70: rgba(24, 226, 176, 0.7);
+    --WHITE_5: rgba(0, 0, 0, 0.05);
+    --GREY_25: rgba(100, 100, 100, 0.25);
+    --GREY_70: rgb(100, 100, 100);
+    --GREEN_LIGHT_10: rgba(3, 28, 22, 0.1);
   }
-}
+} */
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--BLACK);
+  background:var(--WHITE);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
