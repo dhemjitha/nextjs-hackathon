@@ -2,11 +2,11 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { PageContainer } from "../../components/ui/page-container"
-import { Button } from "../../components/ui/button"
-import { Logo } from "../../components/ui/logo"
-import { ServiceTag } from "../../components/ui/service-tag"
-import { Textarea } from "../../components/ui/textarea"
+import { PageContainer } from "@/components/ui/page-container"
+import { Button } from "@/components/ui/button"
+import { Logo } from "@/components/ui/logo"
+import { ServiceTag } from "@/components/ui/service-tag"
+import { Textarea } from "@/components/ui/textarea"
 
 export default function CreateProfile() {
   const [selectedServices, setSelectedServices] = useState<string[]>(["Cleaning"])

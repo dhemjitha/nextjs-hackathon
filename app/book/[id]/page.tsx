@@ -2,12 +2,12 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Logo } from "../../../components/ui/logo"
-import { Button } from "../../../components/ui/button"
-import { Avatar } from "../../../components/ui/avatar"
-import { Rating } from "../../../components/ui/rating"
-import { Input } from "../../../components/ui/input"
-import { Textarea } from "../../../components/ui/textarea"
+import { Logo } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
+import { Avatar } from "@/components/ui/avatar"
+import { Rating } from "@/components/ui/rating"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Calendar, Clock, DollarSign } from "lucide-react"
 
 export default function BookTasker({ params }: { params: { id: string } }) {
@@ -103,7 +103,7 @@ export default function BookTasker({ params }: { params: { id: string } }) {
               onChange={(e) => setBudget(e.target.value)}
               className="pl-10"
               label="Budget"
-              placeholder={`Suggested: ${tasker.price}`}
+              placeholder={`Suggested: $${tasker.price}`}
               required
             />
           </div>

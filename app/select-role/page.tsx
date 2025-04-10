@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { PageContainer } from "../../components/ui/page-container"
-import { Card } from "../../components/ui/card"
-import { Button } from "../../components/ui/button"
-import { Logo } from "../../components/ui/logo"
+import { PageContainer } from "@/components/ui/page-container"
+import { Card } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Logo } from "@/components/ui/logo"
 import { ArrowRight } from "lucide-react"
 
 export default function SelectRole() {

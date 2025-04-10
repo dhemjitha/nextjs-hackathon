@@ -1,22 +1,50 @@
-import * as React from "react"
+"use client"
 
-import { cn } from "@/lib/utils"
+import type React from "react"
 
-const Textarea = React.forwardRef<
-  HTMLTextAreaElement,
-  React.ComponentProps<"textarea">
->(({ className, ...props }, ref) => {
+import { motion } from "framer-motion"
+import { useState } from "react"
+
+interface TextareaProps {
+  placeholder?: string
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  className?: string
+  name?: string
+  required?: boolean
+  label?: string
+}
+
+export function Textarea({
+  placeholder = "",
+  value,
+  onChange,
+  className = "",
+  name,
+  required = false,
+  label,
+}: TextareaProps) {
+  const [isFocused, setIsFocused] = useState(false)
+
   return (
-    <textarea
-      className={cn(
-        "flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        className
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
       )}
-      ref={ref}
-      {...props}
-    />
+      <motion.textarea
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        name={name}
+        required={required}
+        className={`textarea-field ${className}`}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        animate={isFocused ? { scale: 1.01 } : { scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      />
+    </div>
   )
-})
-Textarea.displayName = "Textarea"
-
-export { Textarea }
+}

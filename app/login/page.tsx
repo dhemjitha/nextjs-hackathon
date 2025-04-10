@@ -2,10 +2,10 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { PageContainer } from "../../components/ui/page-container"
-import { Button } from "../../components/ui/button"
-import { Logo } from "../../components/ui/logo"
-import { Input } from "../../components/ui/input"
+import { PageContainer } from "@/components/ui/page-container"
+import { Button } from "@/components/ui/button"
+import { Logo } from "@/components/ui/logo"
+import { Input } from "@/components/ui/input"
 
 export default function Login() {
   const [email, setEmail] = useState("")

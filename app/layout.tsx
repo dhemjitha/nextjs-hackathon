@@ -1,19 +1,20 @@
-import type { Metadata } from 'next'
-import './globals.css'
+import type React from "react"
+import "./globals.css"
+import type { Metadata } from "next"
+import { poppins, passionOne } from "./fonts"
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: "Handy Link - Find Trusted Help, Fast",
+  description: "Connect instantly with skilled taskers ready to make your space shine.",
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${poppins.variable} ${passionOne.variable}`}>
       <body>{children}</body>
     </html>
   )

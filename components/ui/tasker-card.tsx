@@ -1,9 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Avatar } from "./avatar"
-import { Rating } from "./rating"
-import { Button } from "./button"
+import { Avatar } from "@/components/ui/avatar"
+import { Rating } from "@/components/ui/rating"
+import { Button } from "@/components/ui/button"
 
 interface TaskerCardProps {
   id: string

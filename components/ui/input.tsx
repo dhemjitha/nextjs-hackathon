@@ -1,22 +1,53 @@
-import * as React from "react"
+"use client"
 
-import { cn } from "@/lib/utils"
+import type React from "react"
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
-    return (
-      <input
+import { motion } from "framer-motion"
+import { useState } from "react"
+
+interface InputProps {
+  type?: string
+  placeholder?: string
+  value?: string
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  className?: string
+  name?: string
+  required?: boolean
+  label?: string
+}
+
+export function Input({
+  type = "text",
+  placeholder = "",
+  value,
+  onChange,
+  className = "",
+  name,
+  required = false,
+  label,
+}: InputProps) {
+  const [isFocused, setIsFocused] = useState(false)
+
+  return (
+    <div className="w-full">
+      {label && (
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          {label} {required && <span className="text-red-500">*</span>}
+        </label>
+      )}
+      <motion.input
         type={type}
-        className={cn(
-          "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
-        )}
-        ref={ref}
-        {...props}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        name={name}
+        required={required}
+        className={`input-field ${className}`}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        animate={isFocused ? { scale: 1.01 } : { scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       />
-    )
-  }
-)
-Input.displayName = "Input"
-
-export { Input }
+    </div>
+  )
+}

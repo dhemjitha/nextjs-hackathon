@@ -2,13 +2,12 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { PageContainer } from "../../components/ui/page-container"
-import { Button } from "../../components/ui/button"
-import { Logo } from "../../components/ui/logo"
-import { Card } from "../../components/ui/card"
-import { Avatar } from "../../components/ui/avatar"
-import { Rating } from "../../components/ui/rating"
-import { Textarea } from "../../components/ui/textarea"
+import { Logo } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
+import { Avatar } from "@/components/ui/avatar"
+import { Rating } from "@/components/ui/rating"
+import { Card } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft } from "lucide-react"
 
 export default function Profile() {
@@ -68,7 +67,7 @@ export default function Profile() {
         <Logo showText className="absolute left-1/2 transform -translate-x-1/2" />
       </motion.nav>
 
-      <PageContainer>
+      <div className="max-w-3xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -146,7 +145,7 @@ export default function Profile() {
             ))}
           </div>
         </motion.div>
-      </PageContainer>
+      </div>
     </main>
   )
 }

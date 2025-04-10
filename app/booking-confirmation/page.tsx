@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Logo } from "../../components/ui/logo"
-import { Button } from "../../components/ui/button"
+import { Logo } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
 
 export default function BookingConfirmation() {

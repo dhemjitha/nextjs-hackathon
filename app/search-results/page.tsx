@@ -1,11 +1,11 @@
 "use client"
 
 import { useState } from "react"
-import { Logo } from "../../components/ui/logo"
-import { Input } from "../../components/ui/input"
-import { Button } from "../../components/ui/button"
-import { TaskerCard } from "../../components/ui/tasker-card"
-import { Avatar } from "../../components/ui/avatar"
+import { Logo } from "@/components/ui/logo"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { TaskerCard } from "@/components/ui/tasker-card"
+import { Avatar } from "@/components/ui/avatar"
 
 export default function SearchResults() {
   const [searchQuery, setSearchQuery] = useState("Kitchen helper, friendly male, $100 budget")

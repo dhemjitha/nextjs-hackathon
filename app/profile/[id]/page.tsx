@@ -1,10 +1,10 @@
 "use client"
 import { motion } from "framer-motion"
-import { Logo } from "../../../components/ui/logo"
-import { Button } from "../../../components/ui/button"
-import { Avatar } from "../../../components/ui/avatar"
-import { Rating } from "../../../components/ui/rating"
-import { Card } from "../../../components/ui/card"
+import { Logo } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
+import { Avatar } from "@/components/ui/avatar"
+import { Rating } from "@/components/ui/rating"
+import { Card } from "@/components/ui/card"
 import { ArrowLeft } from "lucide-react"
 
 export default function TaskerProfile({ params }: { params: { id: string } }) {

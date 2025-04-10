@@ -2,11 +2,11 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Logo } from "../../components/ui/logo"
-import { Button } from "../../components/ui/button"
-import { Input } from "../../components/ui/input"
-import { AnimatedStar } from "../../components/animations/animated-star"
-import { Avatar } from "../../components/ui/avatar"
+import { Logo } from "@/components/ui/logo"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { AnimatedStar } from "@/components/animations/animated-star"
+import { Avatar } from "@/components/ui/avatar"
 
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState("")
