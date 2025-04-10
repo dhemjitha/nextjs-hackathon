@@ -17,14 +17,14 @@ export default function SelectRole() {
         <Logo showText />
       </div>
 
-      <PageContainer maxWidth="md">
+      <div className="max-w-[643px] min-h-[537px] border p-[40px] border-[#FFFFFF0D]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h1 className="text-3xl font-bold mb-2">
+          <h1 className="text-3xl text-[#292929] whitespace-nowrap font-bold mb-2">
             How would you like to use our <span className="text-green-light">Handy</span> Link?
           </h1>
           <p className="text-gray-600">Finish setting up your profile</p>
@@ -71,7 +71,7 @@ export default function SelectRole() {
             Next
           </Button>
         </motion.div>
-      </PageContainer>
+      </div>
     </main>
   )
 }

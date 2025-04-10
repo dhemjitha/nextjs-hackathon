@@ -61,7 +61,7 @@ export default function Home() {
           animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.9 }}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          <div className="rounded-3xl overflow-hidden">
+          <div className="rounded-[100px] h-[632px] max-w-[640px] overflow-hidden">
             <Image
               src="/images/cleaning-hero.png"
               alt="Woman cleaning kitchen"

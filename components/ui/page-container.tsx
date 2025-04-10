@@ -15,7 +15,7 @@ export function PageContainer({ children, className = "", maxWidth = "xl", cente
     sm: "max-w-sm",
     md: "max-w-md",
     lg: "max-w-lg",
-    xl: "max-w-xl",
+    xl: "max-w-[643px]",
     "2xl": "max-w-2xl",
     full: "max-w-full",
   }

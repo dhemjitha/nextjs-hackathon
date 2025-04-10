@@ -17,7 +17,7 @@ export function Logo({ showText = false, className = "" }: LogoProps) {
         whileHover={{ scale: 1.05 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
-        <Image src="/images/logo.png" alt="Handy Link Logo" width={50} height={30} />
+        <Image src="/images/logo.svg" alt="Handy Link Logo" width={50} height={30} />
         {showText && (
           <div className="flex items-center">
             <span className="text-green-light font-bold">Handy</span>
