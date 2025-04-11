@@ -1,31 +1,36 @@
-import cleaning from "@/assets/cleaner.jpeg";
-import Image from "next/image";
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import cleaning from "@/assets/cleaner.jpeg"
 
 const Hero = () => {
   return (
-    <section className="flex items-center w-full h-screen px-24 py-8 gap-x-12">
-      <div className="w-full  flex flex-col start space-y-5">
-        <p className="font-passionOne font-bold text-6xl">
-          Find Trusted Cleaning Help, Fast.
+    <section className="w-full px-4 py-8 md:px-8 lg:px-24 flex flex-col md:flex-row items-center gap-8 md:gap-12">
+      <div className="w-full flex flex-col space-y-5">
+        <h1 className="font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight">Find Trusted Cleaning Help, Fast.</h1>
+        <p className="text-lg text-muted-foreground max-w-xl">
+          Whether it's a quick tidy-up or a deep clean, connect instantly with skilled taskers ready to make your space
+          shine.
         </p>
-        <p>
-          Whether it’s a quick tidy-up or a deep clean, connect instantly with
-          skilled taskers ready to make your space shine.
-        </p>
-        <div className="flex items-center space-x-2.5">
-          <button className="btn btn-primary">
+        <div className="flex items-center gap-4 pt-2">
+          <Button>
             Get Started
-          </button>
-          <button className="btn btn-text">
+          </Button>
+          <Button variant="outline">
             How it works
-          </button>
+          </Button>
         </div>
       </div>
-      <div className="relative w-full max-h-[600px] h-full rounded-3xl overflow-hidden">
-        <Image src={cleaning} alt="cleaning" fill className="object-cover" />
+      <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-3xl overflow-hidden">
+        <Image
+          src={cleaning || "/placeholder.svg"}
+          alt="Professional cleaning service"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero
