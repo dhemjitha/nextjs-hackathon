@@ -42,8 +42,6 @@ export function Textarea({
         className={`textarea-field ${className}`}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={isFocused ? { scale: 1.01 } : { scale: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
       />
     </div>
   )

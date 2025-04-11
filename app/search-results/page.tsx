@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { TaskerCard } from "@/components/ui/tasker-card"
 import { Avatar } from "@/components/ui/avatar"
+import Navbar from "@/components/ui/global/Navbar"
+import SearchInput from "@/components/ui/global/SearchInput"
 
 export default function SearchResults() {
   const [searchQuery, setSearchQuery] = useState("Kitchen helper, friendly male, $100 budget")
@@ -67,23 +69,13 @@ export default function SearchResults() {
   return (
     <main className="min-h-screen pb-20">
       {/* Header */}
-      <header className="flex justify-between items-center p-6">
-        <Logo showText />
-        <Avatar src="/placeholder.svg?height=100&width=100" alt="User profile" size="md" />
-      </header>
+      <Navbar/>
 
       {/* Search Bar */}
-      <div className="max-w-3xl mx-auto px-6 py-6">
-        <div className="relative">
-          <Input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="pr-24" />
-          <Button variant="primary" className="absolute right-1 top-1 bottom-1">
-            Search
-          </Button>
+      <div className="px-24 flex flex-col space-y-5">
+        <div className="max-w-xl w-full mx-auto">
+          <SearchInput/>
         </div>
-      </div>
-
-      {/* Results */}
-      <div className="max-w-3xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {taskers.map((tasker, index) => (
             <TaskerCard

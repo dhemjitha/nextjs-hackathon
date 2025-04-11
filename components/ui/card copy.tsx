@@ -19,9 +19,6 @@ export function Card({ children, className = "", onClick, selected = false, hove
     <motion.div
       className={`card ${selectedClass} ${hoverClass} ${className}`}
       onClick={onClick}
-      whileHover={hover ? { scale: 1.02 } : {}}
-      whileTap={onClick ? { scale: 0.98 } : {}}
-      transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       {children}
     </motion.div>

@@ -9,8 +9,6 @@ export default function BookingConfirmation() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-md mx-auto px-6 text-center">
-        <Logo showText className="mx-auto mb-8" />
-
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}

@@ -21,8 +21,6 @@ export function Avatar({ src, alt, size = "md", className = "" }: AvatarProps) {
   return (
     <motion.div
       className={`rounded-full overflow-hidden ${sizeClass[size]} ${className}`}
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 400, damping: 10 }}
     >
       <Image
         src={src || "/placeholder.svg"}

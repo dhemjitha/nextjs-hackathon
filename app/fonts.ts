@@ -1,4 +1,4 @@
-import { Poppins } from "next/font/google"
+import { Poppins, Passion_One } from "next/font/google"
 
 // Load Poppins font
 export const poppins = Poppins({
@@ -8,5 +8,11 @@ export const poppins = Poppins({
   display: "swap",
 })
 
+
 // Since Passion One might have issues with Google Fonts, we'll use Poppins as fallback
-export const passionOne = poppins
+export const passionOne = Passion_One({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-passion-one",
+  display: "swap",
+})

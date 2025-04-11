@@ -45,8 +45,6 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        poppins: ["Poppins", "sans-serif"],
-        passionOne: ["Passion One", "sans-serif"],
         "green-dark": "var(--GREEN_DARK)",
         "green-light": "var(--GREEN_LIGHT)",
         white: "var(--WHITE)",
@@ -59,6 +57,11 @@ const config: Config = {
         "grey-25": "var(--GREY_25)",
         "grey-70": "var(--GREY_70)",
         "green-light-10": "var(--GREEN_LIGHT_10)",
+      },
+      fontFamily:{
+        poppins: ["Poppins", "sans-serif"],
+        passionOne: ["Passion One", "sans-serif"],
+        
       },
       borderRadius: {
         lg: "var(--radius)",

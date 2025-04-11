@@ -45,7 +45,6 @@ export function Input({
         className={`input-field ${className}`}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        animate={isFocused ? { scale: 1.01 } : { scale: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       />
     </div>

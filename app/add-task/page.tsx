@@ -8,6 +8,7 @@ import { Logo } from "@/components/ui/logo"
 import { ServiceTag } from "@/components/ui/service-tag"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import Navbar from "@/components/ui/global/Navbar"
 
 export default function AddTask() {
   const [selectedService, setSelectedService] = useState<string>("Cleaning")
@@ -18,19 +19,17 @@ export default function AddTask() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
-      <div className="absolute top-6 left-6">
-        <Logo showText />
-      </div>
+      <Navbar/>
 
       <PageContainer maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-start mb-8"
         >
           <h1 className="text-3xl font-bold mb-2">Create your first Task</h1>
-          <p className="text-gray-600">This is a task you want to do</p>
+          <p className="text-grey">This is a task you want to do</p>
         </motion.div>
 
         <motion.div

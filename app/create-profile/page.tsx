@@ -8,6 +8,8 @@ import { Logo } from "@/components/ui/logo"
 import { ServiceTag } from "@/components/ui/service-tag"
 import { Textarea } from "@/components/ui/textarea"
 
+import Navbar from "@/components/ui/global/Navbar"
+
 export default function CreateProfile() {
   const [selectedServices, setSelectedServices] = useState<string[]>(["Cleaning"])
   const [bio, setBio] = useState("")
@@ -23,22 +25,20 @@ export default function CreateProfile() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center">
-      <div className="absolute top-6 left-6">
-        <Logo showText />
-      </div>
+    <main className="min-h-screen w-full flex flex-col justify-center">
+      <Navbar/>
 
       <PageContainer maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-start mb-8"
         >
           <h1 className="text-3xl font-bold mb-2">
             Welcome to <span className="text-green-light">Handy</span> Link
           </h1>
-          <p className="text-gray-600">Finish setting up your profile</p>
+          <p className="text-grey">Finish setting up your profile</p>
         </motion.div>
 
         <motion.div

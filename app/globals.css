@@ -15,6 +15,7 @@
   --GREY_25: rgba(163, 163, 163, 0.25);
   --GREY_70: rgb(163, 163, 163);
   --GREEN_LIGHT_10: rgba(24, 226, 176, 0.1);
+  outline: none !important;
 }
 
 body {
@@ -26,9 +27,15 @@ body {
 .btn {
   @apply px-3.5 py-2.5 rounded-full transition-all duration-300 ease-in-out;
 }
+.btn-rounded-right {
+  @apply px-4 py-3 rounded-r-xl transition-all duration-300 ease-in-out;
+}
 
 .btn-primary {
-  @apply text-black bg-green-light hover:bg-opacity-90 transform hover:scale-105;
+  @apply text-black bg-green-light hover:bg-opacity-90;
+}
+.btn-transition {
+  @apply transform hover:scale-105
 }
 
 .btn-text {
@@ -36,7 +43,7 @@ body {
 }
 
 .step-number {
-  @apply flex items-center justify-center w-16 h-16 rounded-full bg-green-light text-black font-bold text-2xl;
+  @apply flex items-center justify-center w-16 h-16 rounded-full bg-green-light text-black text-2xl;
 }
 
 .section-title {
@@ -44,7 +51,7 @@ body {
 }
 
 .section-heading {
-  @apply text-4xl md:text-5xl font-bold text-center mb-16;
+  @apply text-3xl md:text-5xl font-bold text-center mb-16;
 }
 
 .hero-title {
@@ -64,15 +71,18 @@ body {
 }
 
 .card-hover:hover {
-  @apply shadow-md transform scale-[1.02];
+  @apply shadow-md;
 }
 
 .input-field {
-  @apply w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-light focus:border-transparent transition-all duration-300;
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 outline-none  focus:border-green-light transition-all duration-300;
+}
+.input-field-rounded-left{
+  @apply w-full px-4 py-3 rounded-l-xl border border-gray-200 outline-none  focus:border-green-light transition-all duration-300;
 }
 
 .textarea-field {
-  @apply w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-light focus:border-transparent transition-all duration-300 min-h-32 resize-none;
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 outline-none  focus:border-green-light transition-all duration-300 min-h-32 resize-none;
 }
 
 .service-tag {
