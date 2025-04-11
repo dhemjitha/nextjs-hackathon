@@ -1,7 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
 import type { ReactNode } from "react"
+import { motion } from "framer-motion"
 import Link from "next/link"
 
 interface ButtonProps {
@@ -13,6 +13,7 @@ interface ButtonProps {
   icon?: ReactNode
   fullWidth?: boolean
   type?: "button" | "submit" | "reset"
+  padding?: string
 }
 
 export function Button({
@@ -24,23 +25,30 @@ export function Button({
   icon,
   fullWidth = false,
   type = "button",
+  padding,
 }: ButtonProps) {
-  const baseClass = "btn flex items-center justify-center gap-2"
+  const baseClass = "btn flex items-center justify-center gap-2 rounded-full"
   let variantClass = ""
 
   switch (variant) {
     case "primary":
-      variantClass = "btn-primary"
-      break
-    case "text":
-      variantClass = "btn-text"
+      variantClass = "btn-primary px-6 py-2"
       break
     case "outline":
-      variantClass = "border border-green-light text-green-light hover:bg-green-light hover:text-black"
+      variantClass = "border border-green-light text-green-light hover:bg-green-light hover:text-black px-6 py-2"
       break
+    case "text":
+      variantClass = "btn-text px-6 py-2"
+      break
+    default:
+      variantClass = "btn-primary px-6 py-2"
   }
 
-  const widthClass = fullWidth ? "w-full" : ""
+  let widthClass = ""
+
+  if (fullWidth) {
+    widthClass = "w-full"
+  }
 
   const buttonContent = (
     <>
@@ -49,6 +57,7 @@ export function Button({
     </>
   )
 
+  const paddingClass = padding || ""
   const motionProps = {
     whileHover: { scale: 1.02 },
     whileTap: { scale: 0.95 },
@@ -57,7 +66,7 @@ export function Button({
 
   if (href) {
     return (
-      <Link href={href} className={`${baseClass} ${variantClass} ${widthClass} ${className}`}>
+      <Link href={href} className={`${baseClass} ${variantClass} ${widthClass} ${paddingClass} ${className}`}>
         <motion.span className="flex items-center justify-center gap-2 w-full" {...motionProps}>
           {buttonContent}
         </motion.span>
@@ -67,7 +76,7 @@ export function Button({
 
   return (
     <motion.button
-      className={`${baseClass} ${variantClass} ${widthClass} ${className}`}
+      className={`${baseClass} ${variantClass} ${widthClass} ${paddingClass} ${className}`}
       onClick={onClick}
       type={type}
       {...motionProps}

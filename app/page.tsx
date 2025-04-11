@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import HowItWorks from "./components/HowItWorks"
 
@@ -15,7 +14,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      <Navbar />
       <Hero />
       <HowItWorks />
     </main>

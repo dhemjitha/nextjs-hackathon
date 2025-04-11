@@ -2,6 +2,8 @@ import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
 import { poppins, passionOne } from "./fonts"
+import { ClerkProvider } from "@clerk/nextjs";
+import Navbar from "./components/Navbar"
 
 export const metadata: Metadata = {
   title: "Handy Link - Find Trusted Help, Fast",
@@ -14,8 +16,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={` ${passionOne.variable} ${poppins.variable}`}>
-      <body>{children}</body>
-    </html>
+    <ClerkProvider appearance={{
+      layout: {
+        unsafe_disableDevelopmentModeWarnings: true,
+      },
+    }}>
+      <html lang="en" className={` ${passionOne.variable} ${poppins.variable}`}>
+        <body>
+          <Navbar />
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   )
 }
