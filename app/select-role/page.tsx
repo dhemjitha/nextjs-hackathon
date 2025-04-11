@@ -1,11 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button copy";
 import { Card } from "@/components/ui/card";
-import Navbar from "@/components/ui/global/Navbar";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { use, useState } from "react";
+import {useStepper} from "@/contexts/SignUpData";
+import { UserRole } from "@/types/user";
+import { useRouter } from "next/navigation";
 
 const roles = [
   {
@@ -28,13 +30,14 @@ const headerContent = {
 };
 
 export default function SelectRole() {
-  const [selectedRole, setSelectedRole] = useState<"client" | "tasker" | null>(
-    null
-  );
+  const navigate = useRouter()
+
+  const [selectedRole, setSelectedRole] = useState<UserRole>("client");
+  const {setStepData,setCurrentStep} = useStepper()
 
   return (
     <main className="min-h-screen w-full flex flex-col ">
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="max-w-[643px] mx-auto border p-[40px] border-[#FFFFFF0D]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -82,13 +85,13 @@ export default function SelectRole() {
           <Button
             variant="primary"
             fullWidth
-            href={selectedRole ? "/create-profile" : "#"}
-            icon={<ArrowRight size={18} />}
-            onClick={(e) => {
-              if (!selectedRole) {
-                e.preventDefault();
-              }
+            onClick={()=>{
+                setStepData({ role: selectedRole });
+              setCurrentStep(2);
+              navigate.replace(`/create-profile?role=${selectedRole}`)
             }}
+            icon={<ArrowRight size={18} />}
+            disabled={!selectedRole}
           >
             Next
           </Button>

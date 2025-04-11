@@ -3,7 +3,6 @@ import "./globals.css"
 import type { Metadata } from "next"
 import { poppins, passionOne } from "./fonts"
 import { ClerkProvider } from "@clerk/nextjs";
-import Navbar from "./components/Navbar"
 
 export const metadata: Metadata = {
   title: "Handy Link - Find Trusted Help, Fast",
@@ -23,7 +22,7 @@ export default function RootLayout({
     }}>
       <html lang="en" className={` ${passionOne.variable} ${poppins.variable}`}>
         <body>
-          <Navbar />
+          
           {children}
         </body>
       </html>

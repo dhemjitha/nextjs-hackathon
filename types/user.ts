@@ -9,3 +9,4 @@ export type User = {
 }
 
 export type UserGender = "male" | "female"
+export type UserRole = "client" | "tasker"
