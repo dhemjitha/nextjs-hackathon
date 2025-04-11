@@ -19,8 +19,6 @@ export default function AddTask() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center">
-      <Navbar/>
-
       <PageContainer maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

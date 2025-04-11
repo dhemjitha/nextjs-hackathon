@@ -5,11 +5,7 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }
 })
 
 const Category = mongoose.models.Category || mongoose.model("Category", categorySchema)
