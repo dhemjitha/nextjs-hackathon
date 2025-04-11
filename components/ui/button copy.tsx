@@ -12,6 +12,7 @@ interface ButtonProps {
   href?: string
   icon?: ReactNode
   fullWidth?: boolean
+  disabled?: boolean
   type?: "button" | "submit" | "reset"
 }
 
@@ -23,6 +24,7 @@ export function Button({
   href,
   icon,
   fullWidth = false,
+  disabled = false,
   type = "button",
 }: ButtonProps) {
   const baseClass = "btn flex items-center justify-center gap-2"
@@ -70,6 +72,7 @@ export function Button({
       className={`${baseClass} ${variantClass} ${widthClass} ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
       {...motionProps}
     >
       {buttonContent}

@@ -1,33 +1,53 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { PageContainer } from "@/components/ui/page-container"
-import { Button } from "@/components/ui/button"
-import { Logo } from "@/components/ui/logo"
-import { ServiceTag } from "@/components/ui/service-tag"
-import { Textarea } from "@/components/ui/textarea"
-
-import Navbar from "@/components/ui/global/Navbar"
+import { Button } from "@/components/ui/button";
+import Loader from "@/components/ui/global/Loader";
+import { Input } from "@/components/ui/input";
+import { PageContainer } from "@/components/ui/page-container";
+import { ServiceTag } from "@/components/ui/service-tag";
+import { Textarea } from "@/components/ui/textarea";
+import { useStepper } from "@/contexts/SignUpData";
+import { UserRole } from "@/types/user";
+import {} from "@clerk/nextjs";
+import { motion } from "framer-motion";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function CreateProfile() {
-  const [selectedServices, setSelectedServices] = useState<string[]>(["Cleaning"])
-  const [bio, setBio] = useState("")
+  const [selectedServices, setSelectedServices] = useState<string[]>([
+    "Cleaning",
+  ]);
 
-  const services = ["Cleaning", "Shopping", "Mount TV", "Plumbing"]
+  const { setStepData, setCurrentStep, stepData } = useStepper();
+  const searchParams = useSearchParams();
+  const role = searchParams.get("role");
+  const navigate = useRouter();
+
+  if (role === undefined) {
+    return <Loader />; // or your custom spinner
+  }
+
+  useEffect(() => {
+    if (role === undefined) return;
+    if (!role || !["client","tasker"].includes(role)){
+      navigate.push("/select-role");
+    }
+  }, [stepData.role, role, navigate]);
+
+  const [bio, setBio] = useState("");
+
+  const services = ["Cleaning", "Shopping", "Mount TV", "Plumbing"];
 
   const toggleService = (service: string) => {
     if (selectedServices.includes(service)) {
-      setSelectedServices(selectedServices.filter((s) => s !== service))
+      setSelectedServices(selectedServices.filter((s) => s !== service));
     } else {
-      setSelectedServices([...selectedServices, service])
+      setSelectedServices([...selectedServices, service]);
     }
-  }
+  };
 
   return (
     <main className="min-h-screen w-full flex flex-col justify-center">
-      <Navbar/>
-
       <PageContainer maxWidth="md">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -47,7 +67,7 @@ export default function CreateProfile() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8"
         >
-          <div className="flex flex-wrap gap-3 mb-6">
+          {role === "tasker" && <div className="flex flex-wrap gap-3 mb-6">
             {services.map((service) => (
               <ServiceTag
                 key={service}
@@ -56,8 +76,11 @@ export default function CreateProfile() {
                 onClick={() => toggleService(service)}
               />
             ))}
-          </div>
-
+          </div>}
+          <Input
+            label="phone number"
+            placeholder="e.g. +12333546789"
+          />
           <Textarea
             label="About Me"
             value={bio}
@@ -71,11 +94,20 @@ export default function CreateProfile() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Button variant="primary" fullWidth href="/add-task">
+          <Button
+            variant="primary"
+            fullWidth
+            onClick={() => {
+              setStepData({ about: bio, categories: selectedServices, role:role as UserRole});
+              setCurrentStep(3);
+              //TODO: Register user
+              navigate.push("/")
+            }}
+          >
             Finish Setup
           </Button>
         </motion.div>
       </PageContainer>
     </main>
-  )
+  );
 }
