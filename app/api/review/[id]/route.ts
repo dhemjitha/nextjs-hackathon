@@ -11,7 +11,8 @@ export async function GET(req: Request, { params }: Params) {
   await connectDB();
 
   try {
-    const review = await Review.findById(params.id);
+    const {id} = await params
+    const review = await Review.findById(id);
     if (!review) {
       return NextResponse.json({ error: "Review not found" }, { status: 404 });
     }
@@ -27,8 +28,9 @@ export async function PUT(req: Request, { params }: Params) {
   await connectDB();
 
   try {
+    const {id} = await params
     const body = await req.json();
-    const updatedReview = await Review.findByIdAndUpdate(params.id, body, {
+    const updatedReview = await Review.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -48,7 +50,8 @@ export async function DELETE(req: Request, { params }: Params) {
   await connectDB();
 
   try {
-    const deletedReview = await Review.findByIdAndDelete(params.id);
+    const {id} = await params
+    const deletedReview = await Review.findByIdAndDelete(id);
 
     if (!deletedReview) {
       return NextResponse.json({ error: "Review not found" }, { status: 404 });

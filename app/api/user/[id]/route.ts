@@ -11,7 +11,7 @@ export async function GET(req: Request,  {params}: Params) {
   await connectDB();
 
   try {
-    const id = await params.id;
+    const {id} = await params
     const user = await User.findById(id);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
@@ -28,8 +28,9 @@ export async function PUT(req: Request,  { params }: Params) {
   await connectDB();
 
   try {
+    const {id} = await params
     const body = await req.json();
-    const updatedUser = await User.findByIdAndUpdate(params.id, body, {
+    const updatedUser = await User.findByIdAndUpdate(id, body, {
       new: true,
       runValidators: true,
     });
@@ -47,9 +48,10 @@ export async function PUT(req: Request,  { params }: Params) {
 // DELETE user by ID
 export async function DELETE(req: Request,  { params }: Params) {
   await connectDB();
-
+  
   try {
-    const deletedUser = await User.findByIdAndDelete(params.id);
+    const {id} = await params
+    const deletedUser = await User.findByIdAndDelete(id);
 
     if (!deletedUser) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });

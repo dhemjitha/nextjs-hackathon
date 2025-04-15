@@ -11,7 +11,8 @@ export async function GET(req: Request, { params }: Params) {
     await connectDB();
 
     try {
-        const category = await Category.findById(params.id);
+        const {id} = await params
+        const category = await Category.findById(id);
         if (!category) {
             return NextResponse.json({ error: "Category not found" }, { status: 404 });
         }
@@ -27,8 +28,9 @@ export async function PUT(req: Request, { params }: Params) {
     await connectDB();
 
     try {
+        const {id} = await params
         const body = await req.json();
-        const updatedCategory = await Category.findByIdAndUpdate(params.id, body, {
+        const updatedCategory = await Category.findByIdAndUpdate(id, body, {
             new: true,
             runValidators: true,
         });
@@ -48,7 +50,8 @@ export async function DELETE(req: Request, { params }: Params) {
     await connectDB();
 
     try {
-        const deletedCategory = await Category.findByIdAndDelete(params.id);
+        const {id} = await params
+        const deletedCategory = await Category.findByIdAndDelete(id);
 
         if (!deletedCategory) {
             return NextResponse.json({ error: "Category not found" }, { status: 404 });

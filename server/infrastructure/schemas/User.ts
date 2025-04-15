@@ -5,12 +5,15 @@ export interface IUser extends Document {
   fullName: string;
   phoneNumber: string;
   description?: string;
+  clerkId:string,
   role: "user" | "tasker" | "admin";
   createdAt: Date;
 }
 
 const UserSchema = new Schema<IUser>(
+  
   {
+    clerkId: { type: String, required: true, unique: true },
     fullName: {
       type: String,
       required: [true, "Full name is required"],
