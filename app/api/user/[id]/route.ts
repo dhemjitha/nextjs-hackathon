@@ -7,11 +7,12 @@ interface Params {
 }
 
 // GET user by ID
-export async function GET(req: Request, { params }: Params) {
+export async function GET(req: Request,  {params}: Params) {
   await connectDB();
 
   try {
-    const user = await User.findById(params.id);
+    const id = await params.id;
+    const user = await User.findById(id);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
@@ -23,7 +24,7 @@ export async function GET(req: Request, { params }: Params) {
 }
 
 // UPDATE user by ID
-export async function PUT(req: Request, { params }: Params) {
+export async function PUT(req: Request,  { params }: Params) {
   await connectDB();
 
   try {
@@ -44,7 +45,7 @@ export async function PUT(req: Request, { params }: Params) {
 }
 
 // DELETE user by ID
-export async function DELETE(req: Request, { params }: Params) {
+export async function DELETE(req: Request,  { params }: Params) {
   await connectDB();
 
   try {

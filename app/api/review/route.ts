@@ -1,5 +1,7 @@
+import { validateRequest } from "@/lib/validate";
 import connectDB from "@/server/infrastructure/db";
 import Review from "@/server/infrastructure/schemas/Review";
+import { reviewSchema } from "@/server/infrastructure/schemas/validation";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -19,16 +21,16 @@ export async function POST(req: Request) {
     await connectDB();
 
     try {
-        const body = await req.json();
-        const { description, rating, taskerId, taskId, userId } = body;
+        const validation = await validateRequest(req, reviewSchema);
 
-        const newReview = new Review({
-            description,
-            rating,
-            taskerId,
-            taskId,
-            userId,
-        });
+        if (!validation.success) {
+            return NextResponse.json(
+                { error: "Validation failed", details: validation.errors },
+                { status: 400 }
+            );
+        }
+        
+        const newReview = new Review(validation.data);
 
         await newReview.save();
         return NextResponse.json(newReview, { status: 201 });

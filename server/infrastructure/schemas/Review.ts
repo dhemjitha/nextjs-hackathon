@@ -1,37 +1,45 @@
-import mongoose from "mongoose"
+import mongoose, { Schema, Document, Types } from "mongoose";
 
-const reviewSchema = new mongoose.Schema({
+export interface IReview extends Document {
+  description: string;
+  rating: number;
+  taskerId: Types.ObjectId;
+  taskId: Types.ObjectId;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const reviewSchema = new Schema<IReview>(
+  {
     description: {
-        type: String,
-        required: true,
-        trim: true,
+      type: String,
+      required: true,
+      trim: true,
     },
     rating: {
-        type: Number,
-        required: true,
-        min: 1,
-        max: 5,
+      type: Number,
+      required: true,
+      min: 1,
+      max: 5,
     },
     taskerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Tasker",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     taskId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Task",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+      required: true,
     },
     userId: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-})
+  },
+  { timestamps: true }
+);
 
-const Review = mongoose.models.Review || mongoose.model("Review", reviewSchema)
-
-export default Review
+const Review = mongoose.models.Review || mongoose.model<IReview>("Review", reviewSchema);
+export default Review;

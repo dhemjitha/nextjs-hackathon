@@ -1,36 +1,43 @@
-import mongoose from "mongoose"
+import mongoose, { Schema, Document, Types } from "mongoose";
 
-const bookingSchema = new mongoose.Schema({
+export interface IBooking extends Document {
+  taskId: Types.ObjectId;
+  taskerId: Types.ObjectId;
+  userId: string;
+  status: "pending" | "completed" | "cancelled";
+  price: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+const bookingSchema = new Schema<IBooking>(
+  {
     taskId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Task",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Task",
+      required: true,
     },
     taskerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Tasker",
-        required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     userId: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     status: {
-        type: String,
-        enum: ["pending", "completed", "cancelled"],
-        default: "pending",
+      type: String,
+      enum: ["pending", "completed", "cancelled"],
+      default: "pending",
     },
     price: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
     },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    }
-})
+  },
+  { timestamps: true }
+);
 
-const Booking = mongoose.models.Booking || mongoose.model("Booking", bookingSchema)
-
-export default Booking
-
+const Booking = mongoose.models.Booking || mongoose.model<IBooking>("Booking", bookingSchema);
+export default Booking;

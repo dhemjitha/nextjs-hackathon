@@ -1,5 +1,7 @@
+import { validateRequest } from "@/lib/validate";
 import connectDB from "@/server/infrastructure/db";
 import Category from "@/server/infrastructure/schemas/Category";
+import { categorySchema } from "@/server/infrastructure/schemas/validation";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -19,12 +21,17 @@ export async function POST(req: Request) {
     await connectDB();
 
     try {
-        const body = await req.json();
-        const { name } = body;
+        const validation = await validateRequest(req, categorySchema);
 
-        const newCategory = new Category({
-            name,
-        });
+        if (!validation.success) {
+            return NextResponse.json(
+                { error: "Validation failed", details: validation.errors },
+                { status: 400 }
+            );
+        }
+
+
+        const newCategory = new Category(validation.data);
 
         await newCategory.save();
         return NextResponse.json(newCategory, { status: 201 });
