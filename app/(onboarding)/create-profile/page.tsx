@@ -7,29 +7,52 @@ import { PageContainer } from "@/components/ui/page-container";
 import { ServiceTag } from "@/components/ui/service-tag";
 import { Textarea } from "@/components/ui/textarea";
 import { useStepper } from "@/contexts/SignUpData";
+import { completeOnboarding } from "@/lib/actions/auth";
 import { UserRole } from "@/types/user";
-import {} from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CreateProfile() {
-  const [selectedServices, setSelectedServices] = useState<string[]>([
-    "Cleaning",
-  ]);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [body, setbody] = useState<{
+    description:string,
+    
+  }>({
+    description:""
+  });
 
   const { setStepData, setCurrentStep, stepData } = useStepper();
   const searchParams = useSearchParams();
   const role = searchParams.get("role");
+  const [error, setError] = useState("");
   const navigate = useRouter();
+  const { user } = useUser();
 
   if (role === undefined) {
     return <Loader />; // or your custom spinner
   }
 
+  const handleSubmit = async () => {
+    const formData = new FormData()
+    formData.append("role", role)
+    formData.append("role", )
+    formData.append("role", bio)
+    const res = await completeOnboarding(formData);
+    if (res?.message) {
+      // Reloads the user's data from the Clerk API
+      await user?.reload();
+      navigate.push("/");
+    }
+    if (res?.error) {
+      setError(res?.error);
+    }
+  };
+
   useEffect(() => {
-    if (role === undefined) return;
-    if (!role || !["client","tasker"].includes(role)){
+    if (!role) return;
+    if (!role || !["client", "tasker"].includes(role)) {
       navigate.push("/select-role");
     }
   }, [stepData.role, role, navigate]);
@@ -67,20 +90,19 @@ export default function CreateProfile() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-8"
         >
-          {role === "tasker" && <div className="flex flex-wrap gap-3 mb-6">
-            {services.map((service) => (
-              <ServiceTag
-                key={service}
-                label={service}
-                selected={selectedServices.includes(service)}
-                onClick={() => toggleService(service)}
-              />
-            ))}
-          </div>}
-          <Input
-            label="phone number"
-            placeholder="e.g. +12333546789"
-          />
+          {role === "tasker" && (
+            <div className="flex flex-wrap gap-3 mb-6">
+              {services.map((service) => (
+                <ServiceTag
+                  key={service}
+                  label={service}
+                  selected={selectedServices.includes(service)}
+                  onClick={() => toggleService(service)}
+                />
+              ))}
+            </div>
+          )}
+          <Input label="phone number" placeholder="e.g. +12333546789" />
           <Textarea
             label="About Me"
             value={bio}
@@ -98,10 +120,15 @@ export default function CreateProfile() {
             variant="primary"
             fullWidth
             onClick={() => {
-              setStepData({ about: bio, categories: selectedServices, role:role as UserRole});
+              setStepData({
+                about: bio,
+                categories: selectedServices,
+                role: role as UserRole,
+              });
               setCurrentStep(3);
+              handleSubmit();
               //TODO: Register user
-              navigate.push("/")
+              navigate.push("/");
             }}
           >
             Finish Setup

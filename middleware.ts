@@ -1,17 +1,28 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
-const isAdminRoute = createRouteMatcher(['/admin'])
+
+const isOnboardingRoute = createRouteMatcher(['/create-profile', "/select-role", "/add-task","/"])
 
 const isProtectedRoute = createRouteMatcher([ '/account', '/book', '/booking-confirmation', '/profile', '/profile/[id]', '/add-task'])
 
+interface SessionClaims {
+  metadata?: {
+    onboardingComplete?: boolean;
+  };
+}
+
 export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) await auth.protect()
-  if (isAdminRoute(req) && (await auth()).sessionClaims?.metadata?.role !== 'admin') {
-    const url = new URL('/', req.url)
-    return NextResponse.redirect(url)
+  const { sessionClaims, userId } = await auth() as { sessionClaims: SessionClaims, userId: string | null };
+  if (userId && isOnboardingRoute(req)) {
+    return NextResponse.next();
   }
-})
+  if (isProtectedRoute(req)) await auth.protect();
+  if (userId && !sessionClaims?.metadata?.onboardingComplete) {
+    const onboardingUrl = new URL('/select-role', req.url);
+    return NextResponse.redirect(onboardingUrl);
+  }
+});
 
 export const config = {
   matcher: [
