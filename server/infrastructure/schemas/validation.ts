@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const userSchema = z.object({
+  clerkId: z.string(),
   email: z.string().email("Invalid email address"),
   fullName: z.string().min(2, "Full name must be at least 2 characters"),
   phoneNumber: z.string().regex(/^\+?\d{10,14}$/, "Invalid phone number"),

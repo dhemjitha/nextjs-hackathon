@@ -2,7 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 import { NextResponse } from 'next/server'
 
 
-const isOnboardingRoute = createRouteMatcher(['/create-profile', "/select-role", "/add-task","/"])
+const isOnboardingRoute = createRouteMatcher(['/create-profile', "/select-role", "/add-task"])
 
 const isProtectedRoute = createRouteMatcher([ '/account', '/book', '/booking-confirmation', '/profile', '/profile/[id]', '/add-task'])
 

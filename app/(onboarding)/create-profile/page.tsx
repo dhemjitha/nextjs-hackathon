@@ -12,16 +12,19 @@ import { UserRole } from "@/types/user";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export default function CreateProfile() {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [body, setbody] = useState<{
-    description:string,
-    
+    description: string;
+    role:string,
+    phoneNumber:string
   }>({
-    description:""
-  });
+    phoneNumber: "",
+    role: "",
+    description:"" 
+   });
 
   const { setStepData, setCurrentStep, stepData } = useStepper();
   const searchParams = useSearchParams();
@@ -31,17 +34,18 @@ export default function CreateProfile() {
   const { user } = useUser();
 
   if (role === undefined) {
-    return <Loader />; // or your custom spinner
+    return <Loader />; 
   }
 
-  const handleSubmit = async () => {
-    const formData = new FormData()
-    formData.append("role", role)
-    formData.append("role", )
-    formData.append("role", bio)
+  const handleBody = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setbody({ ...body, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>)=> {
+    e.preventDefault()
+    const formData = new FormData();
     const res = await completeOnboarding(formData);
     if (res?.message) {
-      // Reloads the user's data from the Clerk API
       await user?.reload();
       navigate.push("/");
     }
@@ -50,12 +54,13 @@ export default function CreateProfile() {
     }
   };
 
-  useEffect(() => {
-    if (!role) return;
-    if (!role || !["client", "tasker"].includes(role)) {
-      navigate.push("/select-role");
-    }
-  }, [stepData.role, role, navigate]);
+useEffect(() => {
+  if (!role) return;
+  if (!role || !["client", "tasker"].includes(role)) {
+    navigate.push("/select-role");
+  }
+},
+[stepData.role, role, navigate]);
 
   const [bio, setBio] = useState("");
 
@@ -72,6 +77,7 @@ export default function CreateProfile() {
   return (
     <main className="min-h-screen w-full flex flex-col justify-center">
       <PageContainer maxWidth="md">
+        <form onSubmit={(e)=>handleSubmit(e)}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,11 +108,17 @@ export default function CreateProfile() {
               ))}
             </div>
           )}
-          <Input label="phone number" placeholder="e.g. +12333546789" />
+          <Input
+            label="phone number"
+            name="phoneNumber"
+            value={body.phoneNumber}
+            onChange={(e)=>handleBody(e)}
+            placeholder="e.g. +12333546789"
+          />
           <Textarea
             label="About Me"
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
+            value={body.description}
+            onChange={(e) => handleBody(e)}
             placeholder="Tell us a bit about yourself..."
           />
         </motion.div>
@@ -119,21 +131,11 @@ export default function CreateProfile() {
           <Button
             variant="primary"
             fullWidth
-            onClick={() => {
-              setStepData({
-                about: bio,
-                categories: selectedServices,
-                role: role as UserRole,
-              });
-              setCurrentStep(3);
-              handleSubmit();
-              //TODO: Register user
-              navigate.push("/");
-            }}
           >
             Finish Setup
           </Button>
         </motion.div>
+        </form>
       </PageContainer>
     </main>
   );
